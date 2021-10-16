@@ -9,25 +9,24 @@ set(ALL_SRC
     ${SRCROOT}/Main.cpp
     ${INCROOT}/MainServer.hpp
     ${SRCROOT}/MainServer.cpp
-    ${INCROOT}/ListenerHandler.hpp
-    ${SRCROOT}/ListenerHandler.cpp
-    ${INCROOT}/ServersHandler.hpp
-    ${SRCROOT}/ServersHandler.cpp
-    ${INCROOT}/ClientsHandler.hpp
-    ${SRCROOT}/ClientsHandler.cpp
-    ${INCROOT}/Server.hpp
-    ${SRCROOT}/Server.cpp
-    ${INCROOT}/Client.hpp
-    ${SRCROOT}/Client.cpp
 
-    ${INCROOT}/Utils/Config.hpp
-    ${INCROOT}/Utils/Utils.hpp
-    ${INCROOT}/Utils/Utils.inl
-    ${SRCROOT}/Utils/Utils.cpp
+    ${INCROOT}/Core/Client.hpp
+    ${SRCROOT}/Core/Client.cpp
+    ${INCROOT}/Core/Server.hpp
+    ${SRCROOT}/Core/Server.cpp
+    ${INCROOT}/Core/ClientsDB.hpp
+    ${SRCROOT}/Core/ClientsDB.cpp
+    ${INCROOT}/Core/ServersDB.hpp
+    ${SRCROOT}/Core/ServersDB.cpp
 )
 
 add_executable(${PROJECT_NAME} ${ALL_SRC})
-target_include_directories(${PROJECT_NAME} PRIVATE ${INCROOT} ${INCROOT}/Utils)
+target_include_directories(${PROJECT_NAME} PRIVATE ${INCROOT} ${INCROOT}/Core)
 
-add_subdirectory(extlibs/SFML)
-target_link_libraries(${PROJECT_NAME} PRIVATE sfml-system sfml-network)
+if(WIN32)
+	add_subdirectory(extlibs/SFML)
+else()
+	find_package(SFML 2.5 COMPONENTS system window graphics audio network REQUIRED)
+endif(WIN32)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE sfml-system sfml-window sfml-graphics sfml-audio sfml-network)

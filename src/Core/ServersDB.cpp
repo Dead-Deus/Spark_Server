@@ -1,5 +1,7 @@
 #include "ServersDB.hpp"
 
+#include <iostream>
+
 #include "Server.hpp"
 
 ServersDB& ServersDB::getInstance()
@@ -19,4 +21,13 @@ Server& ServersDB::createServer()
 Server& ServersDB::getServer(unsigned id)
 {
     return *m_servers[id];
+}
+
+std::ostream& operator<<(std::ostream& out, ServersDB& serversDB)
+{
+    for (auto server : serversDB.m_servers)
+    {
+        out << "Server:[ " << *server << " ]" << std::endl;
+    }
+    return out;
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <iosfwd>
 
 class Server;
 
@@ -16,4 +17,8 @@ private:
     ServersDB() = default;
 
     std::vector<Server*> m_servers;
+
+    friend std::ostream& operator<<(std::ostream& out, ServersDB& serversDB);
 };
+
+std::ostream& operator<<(std::ostream& out, ServersDB& serversDB);

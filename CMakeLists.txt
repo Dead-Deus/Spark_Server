@@ -18,10 +18,13 @@ set(ALL_SRC
     ${SRCROOT}/Core/ClientsDB.cpp
     ${INCROOT}/Core/ServersDB.hpp
     ${SRCROOT}/Core/ServersDB.cpp
+
+    ${INCROOT}/Handlers/ConsoleHandler.hpp
+    ${SRCROOT}/Handlers/ConsoleHandler.cpp
 )
 
 add_executable(${PROJECT_NAME} ${ALL_SRC})
-target_include_directories(${PROJECT_NAME} PRIVATE ${INCROOT} ${INCROOT}/Core)
+target_include_directories(${PROJECT_NAME} PRIVATE ${INCROOT} ${INCROOT}/Core ${INCROOT}/Handlers)
 
 if(WIN32)
 	add_subdirectory(extlibs/SFML)

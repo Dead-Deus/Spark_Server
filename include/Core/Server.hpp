@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iosfwd>
+
 class Server
 {
 public:
@@ -7,5 +9,9 @@ public:
     ~Server();
 
 private:
-    unsigned id;
+    unsigned m_id;
+
+    friend std::ostream& operator<<(std::ostream& out, Server& server);
 };
+
+std::ostream& operator<<(std::ostream& out, Server& server);

@@ -1,5 +1,7 @@
 #include "ClientsDB.hpp"
 
+#include <iostream>
+
 #include "Client.hpp"
 
 ClientsDB& ClientsDB::getInstance()
@@ -19,4 +21,13 @@ Client& ClientsDB::createClient()
 Client& ClientsDB::getClient(unsigned id)
 {
     return *m_clients[id];
+}
+
+std::ostream& operator<<(std::ostream& out, ClientsDB& clientsDB)
+{
+    for (auto client : clientsDB.m_clients)
+    {
+        out << "Client:[ " << *client << " ]" << std::endl;
+    }
+    return out;
 }
